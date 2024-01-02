@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
- const mongoosastic = require('mongoosastic')
+const mongoosastic = require('mongoosastic');
 
 const instituteSchema = mongoose.Schema({
     aicte_id : {
@@ -53,16 +53,18 @@ const Institute = mongoose.model("Institute", instituteSchema);
 module.exports = Institute;
 
 // const stream = Institute.synchronize();
-// const count = 0;
 
-// stream.on('data', function(err, doc) {
-// count++;
+// let count = 0;
+
+// stream.on('data', function () {
+//   count++;
 // });
 
-// stream.on('close', function() {
-// console.log('indexed ' + count + ' documents!');
+// stream.on('close', function () {
+//   console.log('Indexed ' + count + ' documents!');
+//   mongoose.connection.close(); // Close the MongoDB connection after syncing
 // });
 
-// stream.on('error', function(err) {
-// console.log(err);
+// stream.on('error', function (err) {
+//   console.log(err);
 // });

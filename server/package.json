@@ -18,6 +18,7 @@
     "mongodb": "^6.3.0",
     "mongoosastic": "^5.0.0",
     "mongoose": "^8.0.3",
+    "mongoose-elasticsearch-xp": "^5.8.0",
     "nodemon": "^3.0.2"
   }
 }

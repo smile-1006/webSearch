@@ -1,4 +1,4 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const express = require("express");
 const app = express();
 // const cors = require("cors");
@@ -15,6 +15,9 @@ const { Client } = require('@elastic/elasticsearch');
 const PORT = process.env.PORT || 4000;
 const database = require("./config/database");
 database.connect();
+
+//routes
+app.use("/api/v1/institute", instituteRoutes);
 
 app.get('/', (req, res) => {
     res.send("Home Page");
