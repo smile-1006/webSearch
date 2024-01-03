@@ -48,16 +48,16 @@ const esClient = new Client({ node: 'http://localhost:9200' });
 
 //const mongodbCollection = mongoClient.db('yourDatabase').collection('yourCollection');
 
-// //Index data in Elasticsearch
-// async function indexDataInElasticsearch(data) {
-//   const { _id, ...indexedData } = data;
-//   await esClient.index({
-//     index: 'aicte',
-//     id: _id.toString(),
-//     body: indexedData,
-//   });
-// }
-// indexDataInElasticsearch()
+//Index data in Elasticsearch
+async function indexDataInElasticsearch(data) {
+  const { _id, ...indexedData } = data;
+  await esClient.index({
+    index: 'aicte',
+    id: _id.toString(),
+    body: indexedData,
+  });
+}
+indexDataInElasticsearch()
 
 // app.post("/create", async (req, res) => {
 //     const institute = new Institute(req.body);
