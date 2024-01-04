@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const Institute = require("./models/institute");
 dotenv.config();
 const elasticsearch = require("elasticsearch");
+const bodyParser = require('body-parser');
 
 
 const { Client } = require('@elastic/elasticsearch');
@@ -45,11 +46,14 @@ const esClient = new Client({ node: 'http://localhost:9200' });
 //   });
 // }
 // indexDataInElasticsearch()
-
+app.use(bodyParser.json());
 app.post("/create", async (req, res) => {
+    if (!req.body) {
+      return res.status(400).send('Request body is missing');
+    }
     const institute = new Institute(req.body);
     try {
-    elasticClient.index(
+    esClient.index(
         {
         index: "institute",
         type: "instituteType",
@@ -65,9 +69,9 @@ app.post("/create", async (req, res) => {
         }
       );
       await institute.save();
-      res.status(201).send("User has been created.");
+      res.status(200).send("success " + institute._id);
     } catch (error) {
-      res.status(400).send("Error:", error);
+      res.status(400).send("Error: " + error.toString());
       console.log(error);
     }
   });
