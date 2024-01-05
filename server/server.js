@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 // const cors = require("cors");
 const dotenv = require("dotenv");
+const bodyParser = require('body-parser');
+
 const { Client } = require('@elastic/elasticsearch');
 
 const elasticsearch = require("elasticsearch");
@@ -52,7 +54,7 @@ app.listen(PORT, ()=> {
 //   });
 // }
 // indexDataInElasticsearch()
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.post("/create", async (req, res) => {
     if (!req.body) {
       return res.status(400).send('Request body is missing');
