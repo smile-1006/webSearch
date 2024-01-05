@@ -3,21 +3,29 @@ const express = require("express");
 const app = express();
 // const cors = require("cors");
 const dotenv = require("dotenv");
+const { Client } = require('@elastic/elasticsearch');
+
+const elasticsearch = require("elasticsearch");
+
 const Institute = require("./models/institute");
 dotenv.config();
-const elasticsearch = require("elasticsearch");
-const bodyParser = require('body-parser');
 
+// Elasticsearch Connection
+const esClient = new Client(
+  { node: 'http://localhost:9200' }
+  );
 
-const { Client } = require('@elastic/elasticsearch');
+const instituteRoutes = require("./routes/institutes");
+//routes
+app.use("/api/v1/institute", instituteRoutes);
+
 
 
 const PORT = process.env.PORT || 4000;
 const database = require("./config/database");
 database.connect();
 
-//routes
-//app.use("/api/v1/institute", instituteRoutes);
+
 
 app.get('/', (req, res) => {
     res.send("Home Page");
@@ -28,11 +36,9 @@ app.listen(PORT, ()=> {
 });
 
 
-const { MongoClient } = require('mongodb');
 
 
-// Elasticsearch Connection
-const esClient = new Client({ node: 'http://localhost:9200' });
+
 
 
 
@@ -46,7 +52,7 @@ const esClient = new Client({ node: 'http://localhost:9200' });
 //   });
 // }
 // indexDataInElasticsearch()
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.post("/create", async (req, res) => {
     if (!req.body) {
       return res.status(400).send('Request body is missing');
@@ -94,5 +100,5 @@ app.post("/create", async (req, res) => {
 //     console.log(result);
 //   });
 
- 
+
 
