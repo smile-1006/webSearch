@@ -17,4 +17,4 @@ app.get('/search/:index/:type', async (req, res) => {
   res.json(data);
 });
 
-app.listen(3333, () => console.log('server running at 3333'));
+app.listen(4000, () => console.log('server running at 3333'));
